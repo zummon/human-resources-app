@@ -2,32 +2,42 @@
 	
 </script>
 <script>
-	async function gather() {
+	const gather = async ({ date }) => {
 		const res = await fetch(`https://raw.githubusercontent.com/zummon/hr-data/main/base.json`);
-		const json = await res.text();
+		const json = await res.json();
+		let data = json.slice()
 
-		return json;
+		if (date){ 
+			data = data.map((person) => {
+				let showname = 
+				person.name.reduce((prev, cur, index, all) => {
+					if (cur.applydate <= date){
+						return {...prev, ...cur}
+					}
+					return prev
+				}, {})
+				return {...person, name: showname}
+			})
+		}
+
+		return data;
 	}
-	let date = ''
+
+	let date = new Date().toISOString().split('T')[0]
 	let promise = gather();
 
-	function handleClick() {
-		promise = gather();
-	}
 </script>
 
 <input bind:value={date} />
-<button on:click={handleClick}>
+<button on:click={() => promise = gather({date})}>
 	generate
+</button>
+<button on:click={() => date = ''}>
+	clear
 </button>
 
 {#await promise}
 	<p>...waiting</p>
 {:then data}
-	<p>
-	{
-	
-		data
-		
-		}</p>
+	<p>{JSON.stringify(data)}</p>
 {/await}
