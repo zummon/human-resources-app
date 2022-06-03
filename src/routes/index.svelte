@@ -1,34 +1,33 @@
 <script context="module">
 	
 </script>
-
 <script>
-	let promise = getRandomNumber();
-
-	async function getRandomNumber() {
+	async function gather() {
 		const res = await fetch(`https://raw.githubusercontent.com/zummon/hr-data/main/base.json`);
-		const text = await res.json();
+		const json = await res.text();
 
-		if (res.ok) {
-			return text;
-		} else {
-			throw new Error(text);
-		}
+		return json;
 	}
+	let date = ''
+	let promise = gather();
 
 	function handleClick() {
-		promise = getRandomNumber();
+		promise = gather();
 	}
 </script>
 
+<input bind:value={date} />
 <button on:click={handleClick}>
-	generate random number
+	generate
 </button>
 
 {#await promise}
 	<p>...waiting</p>
-{:then number}
-	<p>The number is {JSON.stringify(number)}</p>
-{:catch error}
-	<p style="color: red">{error.message}</p>
+{:then data}
+	<p>
+	{
+	
+		data
+		
+		}</p>
 {/await}
