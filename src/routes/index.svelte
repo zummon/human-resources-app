@@ -31,7 +31,7 @@
 		if (option){
 
 		}
-		const res = await fetch(`https://raw.githubusercontent.com/zummon/hr-data/main/base.json`);
+		const res = await fetch(`/database.json`);
 		const json = await res.json();
 		let data = json.slice();
 
