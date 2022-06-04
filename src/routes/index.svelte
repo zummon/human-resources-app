@@ -6,21 +6,22 @@
 		return new Date().toISOString().split('T')[0]
 	}
 	const compare = ( a, b ) => {
-		if ( a.last_nom < b.last_nom ){
+		if ( a.applydate < b.applydate ){
 			return -1;
 		}
-		if ( a.last_nom > b.last_nom ){
+		if ( a.applydate > b.applydate ){
 			return 1;
 		}
 		return 0;
 	}
 	const objectsToArray = (objects) => {
-		let headers = ['No','Name']
+		let headers = ['No','Name','Field']
 		let array = objects.map((obj,index) => {
 
 			return [
 				index + 1, 
-				`${obj.name.beginwith} ${obj.name.firstname} ${obj.name.middlename} ${obj.name.lastname}`
+				`${obj.name.beginwith} ${obj.name.firstname} ${obj.name.middlename} ${obj.name.lastname}`,
+				obj.field.position
 			]
 		})
 
@@ -36,15 +37,22 @@
 
 		if (option && option.date){
 			data = data.map((person) => {
-				let showname = 
-				person.name.sort(compare).reduce((prev, cur, index, all) => {
-					if (cur.applydate <= option.date){
-						return {...prev, ...cur}
+				let showname = person.name.sort(compare).reduce((prev, cur) => {
+					if (cur.applydate > option.date){
+						return prev
 					}
-					return prev
+					return {...prev, ...cur}
 				}, {})
-				return {...person, name: showname}
-			})
+
+				let showfield = person.field.sort(compare).reduce((prev, cur) => {
+					if (cur.applydate > option.date){
+						return prev
+					}
+					return {...prev, ...cur}
+				}, {})
+				
+				return {...person, name: showname, field: showfield}
+			}).filter((person) => person.field.applydate <= option.date && person.field.position)
 		}
 
 		return data;
@@ -70,6 +78,7 @@
 			<tr>
 				<td>{d[0]}</td>
 				<td>{d[1]}</td>
+				<td>{d[2]}</td>
 			</tr>
 		{:else}
 			not found...
