@@ -21,7 +21,7 @@
 			return [
 				index + 1, 
 				`${obj.name.beginwith} ${obj.name.firstname} ${obj.name.middlename} ${obj.name.lastname}`,
-				obj.field.position
+				`${obj.field.type} ${obj.field.position} ${obj.field.group} ${obj.field.place}`
 			]
 		})
 
@@ -57,7 +57,7 @@
 
 		return data;
 	}
-
+''
 	let date = now()
 	let promise = gather({
 		date: now()
@@ -65,8 +65,11 @@
 
 </script>
 
-<input bind:value={date} />
-<button on:click={() => promise = gather({ date })}>
+<input bind:value={date} type='date' />
+<button on:click={() => {
+	promise = gather({ date }) 
+	console.log(date)
+}}>
 	generate
 </button>
 

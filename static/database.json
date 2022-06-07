@@ -22,7 +22,10 @@
 		"field": [
 			{
 				"applydate": "2022-02-01",
-				"position": "Employee"
+				"position": "Employee",
+				"group": "support",
+				"place": "Head office",
+				"type": "outsource"
 			}
 		]
 	},
@@ -49,7 +52,10 @@
 		"field": [
 			{
 				"applydate": "2014-01-01",
-				"position": "Accountant"
+				"position": "Accountant",
+				"group": "support",
+				"place": "Head office",
+				"type": "full-time"
 			},
 			{
 				"applydate": "2018-01-01",
@@ -77,7 +83,10 @@
 		"field": [
 			{
 				"applydate": "2018-03-01",
-				"position": "Service"
+				"position": "Service",
+				"group": "direct",
+				"place": "Hospital Bangkok",
+				"type": "full-time"
 			},
 			{
 				"applydate": "2022-03-01",
