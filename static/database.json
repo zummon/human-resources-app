@@ -27,6 +27,15 @@
 				"place": "Head office",
 				"type": "outsource"
 			}
+		],
+		"knowledge": [
+			{
+				"graddate": "",
+				"level": "",
+				"name": "",
+				"major": "",
+				"provider": ""
+			}
 		]
 	},
 	{
