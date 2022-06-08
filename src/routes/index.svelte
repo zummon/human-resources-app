@@ -73,6 +73,8 @@
 	generate
 </button>
 
+<hr>
+
 {#await promise}
 	<p>...waiting</p>
 {:then data}
