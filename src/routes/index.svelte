@@ -14,19 +14,7 @@
 		}
 		return 0;
 	}
-	const objectsToArray = (objects) => {
-		let headers = ['No','Name','Field']
-		let array = objects.map((obj,index) => {
-
-			return [
-				index + 1, 
-				`${obj.name.beginwith} ${obj.name.firstname} ${obj.name.middlename} ${obj.name.lastname}`,
-				`${obj.field.type} ${obj.field.position} ${obj.field.group} ${obj.field.place}`
-			]
-		})
-
-		return [headers,...array]
-	}
+	
 	const gather = async (option) => {
 		
 		const res = await fetch(`/database.json`);
@@ -36,7 +24,7 @@
 		if (typeof option === 'object'){
 			if (option.date){
 				data = data.map((person) => {
-					let showname = person.name.sort(compare).reduce((prev, cur) => {
+					let showname = person.personal.sort(compare).reduce((prev, cur) => {
 						if (cur.applydate > option.date){
 							return prev
 						}
@@ -50,14 +38,16 @@
 						return {...prev, ...cur}
 					}, {})
 					
-					return {...person, name: showname, field: showfield}
+					return {...person, personal: showname, field: showfield}
 				}).filter((person) => {
+					
 					return person.field.applydate <= option.date && person.field.position
 				})
+			} else if (option.id){
+				
+				return data.find(person => person.id === option.id)
 			}
 			
-		} else if (typeof option === 'number') {
-			return data[option]
 		}
 
 		return data;
@@ -78,24 +68,36 @@
 	generate
 </button>
 
-<hr>
+<hr>	
 
 {#await promise}
 	<p>...waiting</p>
 {:then data}
 	<table>
-		{#each objectsToArray(data) as d, index (`data-${index}`)}
-			<tr on:click={async () => {
-				person = await gather(index-1)
-				console.log(index,person)
-			}}>
-				<td>{d[0]}</td>
-				<td>{d[1]}</td>
-				<td>{d[2]}</td>
+		<thead>
+			<tr>
+				<th>No</th>
+				<th>Name</th>
+				<th>Field</th>
 			</tr>
-		{:else}
-			not found...
-		{/each}
+		</thead>
+		<tbody>
+			{#each data as obj, index (`data-${index}`)}
+				<tr on:click={async () => {
+					person = await gather({ id: obj.id })
+				}}>
+					<td>{index + 1}</td>
+					<td>
+						{obj.personal.beginwith} {obj.personal.firstname} {obj.personal.middlename} {obj.personal.lastname}
+					</td>
+					<td>
+						{obj.field.type} {obj.field.position} {obj.field.group} {obj.field.place}
+					</td>
+				</tr>
+			{:else}
+				not found...
+			{/each}
+		</tbody>
 	</table>
 {/await}
 
@@ -103,12 +105,12 @@
 
 {#each Object.keys(person) as key, index (`person-${index}`)}
 	{#if typeof person[key] === 'string'}
-		{key}: <span contenteditable="true">{person[key]}</span><br>
+		{key}: <span contenteditable="true" bind:textContent={person[key]}></span><br>
 	{:else if Array.isArray(person[key])}
-		{#each person[key] as atr, inde (`atr-${index}-${inde}`)}
+		{#each person[key] as atr, ind (`atr-${index}-${ind}`)}
 			{key}:
-			{#each Object.keys(atr) as str, i (`key-${index}-${inde}-${i}`)}
-				&nbsp;<span contenteditable="true">{person[key][inde][str]}</span>
+			{#each Object.keys(atr) as str, i (`key-${index}-${ind}-${i}`)}
+				&nbsp;<span contenteditable="true" bind:textContent={person[key][ind][str]}></span>
 			{/each}
 			<br>
 		{/each}

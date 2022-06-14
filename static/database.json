@@ -1,7 +1,7 @@
 [
 	{
 		"id": "1234567890123",
-		"name": [
+		"personal": [
 			{
 				"applydate": "1996-02-27",
 				"beginwith": "",
@@ -30,17 +30,24 @@
 		],
 		"knowledge": [
 			{
-				"graddate": "",
-				"level": "",
-				"name": "",
-				"major": "",
-				"provider": ""
+				"graddate": "2018-03-01",
+				"level": "PHD",
+				"name": "Accountant",
+				"major": "Accounting",
+				"provider": "DPU"
+			},
+			{
+				"graddate": "2016-03-01",
+				"level": "High cert",
+				"name": "Accountant",
+				"major": "Accounting",
+				"provider": "SBAC"
 			}
 		]
 	},
 	{
 		"id": "9999999999999",
-		"name": [
+		"personal": [
 			{
 				"applydate": "2008-12-29",
 				"lastname": "Morgan"
@@ -70,11 +77,20 @@
 				"applydate": "2018-01-01",
 				"position": "CEO"
 			}
+		],
+		"knowledge": [
+			{
+				"graddate": "2012-03-01",
+				"level": "PHD",
+				"name": "Accountant",
+				"major": "Accounting",
+				"provider": "DPU"
+			}
 		]
 	},
 	{
 		"id": "0000000000000",
-		"name": [
+		"personal": [
 			{
 				"applydate": "2021-12-29",
 				"beginwith": "Mrs",
@@ -100,6 +116,15 @@
 			{
 				"applydate": "2022-03-01",
 				"position": null
+			}
+		],
+		"knowledge": [
+			{
+				"graddate": "2016-03-01",
+				"level": "PHD",
+				"name": "Service",
+				"major": "Service",
+				"provider": "unknown"
 			}
 		]
 	}
