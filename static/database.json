@@ -4,9 +4,9 @@
 		"personal": [
 			{
 				"applydate": "1996-02-27",
-				"beginwith": "",
+
 				"firstname": "Tee",
-				"middlename": "",
+
 				"lastname": "Anan",
 				"sex": "male"
 			},
@@ -54,9 +54,9 @@
 			},
 			{
 				"applydate": "1995-02-27",
-				"beginwith": "",
+
 				"firstname": "Wonder",
-				"middlename": "",
+
 				"lastname": "Genda",
 				"sex": "female"
 			},
@@ -100,7 +100,7 @@
 				"applydate": "1999-01-22",
 				"beginwith": "Ms",
 				"firstname": "Beck",
-				"middlename": "",
+
 				"lastname": "Kino",
 				"sex": "female"
 			}

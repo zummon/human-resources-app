@@ -17,9 +17,9 @@
 	
 	const gather = async (option) => {
 		
-		const res = await fetch(`/database.json`);
-		const json = await res.json();
-		let data = json.slice();
+		const datamodel = await fetch(`/datamodel.json`).then(res => res.json());
+		const database = await fetch(`/database.json`).then(res => res.json());
+		let data = database.slice();
 
 		if (typeof option === 'object'){
 			if (option.date){
@@ -29,14 +29,14 @@
 							return prev
 						}
 						return {...prev, ...cur}
-					}, {})
+					}, datamodel.personal[0])
 
 					let showfield = person.field.sort(compare).reduce((prev, cur) => {
 						if (cur.applydate > option.date){
 							return prev
 						}
 						return {...prev, ...cur}
-					}, {})
+					}, datamodel.field[0])
 					
 					return {...person, personal: showname, field: showfield}
 				}).filter((person) => {
@@ -65,10 +65,10 @@
 <button on:click={() => {
 	promise = gather({ date }) 
 }}>
-	generate
+	Load
 </button>
 
-<hr>	
+<hr>
 
 {#await promise}
 	<p>...waiting</p>
@@ -105,14 +105,21 @@
 
 {#each Object.keys(person) as key, index (`person-${index}`)}
 	{#if typeof person[key] === 'string'}
-		{key}: <span contenteditable="true" bind:textContent={person[key]}></span><br>
+		<div style="display: flex; flex-wrap: wrap">
+			<div><b>{key}</b>:&nbsp;</div>
+			<div style="padding: 4px" contenteditable="true" bind:textContent={person[key]}></div>
+		</div>
 	{:else if Array.isArray(person[key])}
-		{#each person[key] as atr, ind (`atr-${index}-${ind}`)}
-			{key}:
-			{#each Object.keys(atr) as str, i (`key-${index}-${ind}-${i}`)}
-				&nbsp;<span contenteditable="true" bind:textContent={person[key][ind][str]}></span>
+		<div style="margin: 8px 0 0 0">
+			<b>{key}</b>:
+			{#each person[key] as atr, ind (`atr-${index}-${ind}`)}
+				<div style="display: flex; flex-wrap: wrap; padding: 4px; border: 1px solid">
+					{#each Object.keys(atr) as str, i (`key-${index}-${ind}-${i}`)}
+						<div><i>{str}</i>:&nbsp;</div>
+						<div style="margin: 0 8px 0 0; font-weight: 700" contenteditable="true" bind:textContent={person[key][ind][str]}></div>
+					{/each}
+				</div>
 			{/each}
-			<br>
-		{/each}
+		</div>
 	{/if}
 {/each}

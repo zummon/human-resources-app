@@ -1,0 +1,31 @@
+{
+	"id": "",
+	"personal": [
+		{
+			"applydate": "",
+			"beginwith": "",
+			"firstname": "",
+			"middlename": "",
+			"lastname": "",
+			"sex": ""
+		}
+	],
+	"field": [
+		{
+			"applydate": "",
+			"position": "",
+			"group": "",
+			"place": "",
+			"type": ""
+		}
+	],
+	"knowledge": [
+		{
+			"graddate": "",
+			"level": "",
+			"name": "",
+			"major": "",
+			"provider": ""
+		}
+	]
+}
