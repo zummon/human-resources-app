@@ -14,11 +14,13 @@
 		}
 		return 0;
 	}
+
+	export let people = [], model = {}
 	
 	const gather = async (option) => {
 		
-		const datamodel = await fetch(`/datamodel.json`).then(res => res.json());
-		const database = await fetch(`/database.json`).then(res => res.json());
+		const datamodel = model;
+		const database = people
 		let data = database.slice();
 
 		if (typeof option === 'object'){
