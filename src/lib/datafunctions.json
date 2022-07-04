@@ -1,0 +1,43 @@
+const gather = async (option) => {
+		
+  const datamodel = model;
+  const database = people
+  let data = database.slice();
+
+  if (typeof option === 'object'){
+    if (option.date){
+      data = data.map((person) => {
+        let personal = person.personal.sort(compare).reduce((prev, cur) => {
+          if (cur.applydate > option.date){
+            return prev
+          }
+          return {...prev, ...cur}
+        }, datamodel.personal[0])
+
+        let field = person.field.sort(compare).reduce((prev, cur) => {
+          if (cur.applydate > option.date){
+            return prev
+          }
+          return {...prev, ...cur}
+        }, datamodel.field[0])
+        
+        return {...person, personal, field}
+      }).filter((person) => {
+        
+        return person.field.applydate <= option.date && person.field.position
+      })
+    } else if (option.id){
+      let obj = data.find(person => person.id === option.id)
+      obj = {...obj,
+        personal: obj.personal.sort(compare),
+        field: obj.field.sort(compare),
+        knowledge: obj.knowledge //.sort(compare)
+      }
+      
+      return obj
+    }
+    
+  }
+
+  return data;
+}
