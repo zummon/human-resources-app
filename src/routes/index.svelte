@@ -2,7 +2,11 @@
 	
 </script>
 <script>
-	import { gather } from '../lib/datafunctions'
+	const gather = async ({date}) => {
+		let data = await fetch(`/api-${date}`).then(res => res.json()).then(body => body.data)
+		
+		return data
+	}
 
 	const now = () => {
 		return new Date().toISOString().split('T')[0]
@@ -15,7 +19,7 @@
 </script>
 
 <div class="flex flex-wrap justify-center print:hidden">
-	<a class="inline-flex items-center px-3 rounded border-2 font-semibold shadow focus:border-orange-500 hover:border-orange-500 focus:text-orange-500 hover:text-orange-500" href="work-1">Work 1</a>
+	<a class="inline-flex items-center px-3 rounded border-2 font-semibold shadow focus:border-orange-500 hover:border-orange-500 focus:text-orange-500 hover:text-orange-500" href="/work-1">Work 1</a>
 </div>
 <div class="min-h-[32px]"></div>
 <div class="flex flex-wrap justify-center">
@@ -25,11 +29,12 @@
 			promise = gather({ date }) 
 		}} />
 	</label>
-	
-		<a class="inline-flex items-center px-3 rounded border-2 font-semibold shadow focus:border-orange-500 hover:border-orange-500 focus:text-orange-500 hover:text-orange-500" href="data-as-{date}">
-			api
-		</a>
-	
+	<a class="inline-flex items-center px-3 rounded border-2 font-semibold shadow focus:border-orange-500 hover:border-orange-500 focus:text-orange-500 hover:text-orange-500" href="/api-{date}">
+		api by date
+	</a>
+	<a class="inline-flex items-center px-3 rounded border-2 font-semibold shadow focus:border-orange-500 hover:border-orange-500 focus:text-orange-500 hover:text-orange-500" href="/api">
+		api all
+	</a>
 </div>
 <div class="min-h-[32px]"></div>
 
@@ -65,7 +70,7 @@
 				</tr>
 			{:else}
 				<tr class="font-semibold">
-					<td class="" colspan="99">
+					<td class="text-center" colspan="99">
 						not found...
 					</td>
 				</tr>

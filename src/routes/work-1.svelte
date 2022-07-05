@@ -2,6 +2,34 @@
 
 	let store = []
   	let person = {}
+
+		export const gather = async (option) => {
+	let data = database.slice();
+
+	if (typeof option === "object") {
+		if (option.date) {
+			data;
+		} else if (option.id) {
+			let obj = data.find((person) => person.id === option.id);
+			obj = {
+				...obj,
+				personal: obj.personal.sort((a, b) =>
+					a.applydate < b.applydate ? -1 : a.applydate > b.applydate ? 1 : 0
+				),
+				field: obj.field.sort((a, b) =>
+					a.applydate < b.applydate ? -1 : a.applydate > b.applydate ? 1 : 0
+				),
+				knowledge: obj.knowledge.sort((a, b) =>
+					a.graddate < b.graddate ? -1 : a.graddate > b.graddate ? 1 : 0
+				),
+			};
+
+			return obj;
+		}
+	}
+
+	return data;
+};
 </script>
 
 <button class="inline-flex items-center px-3 rounded border-2 font-semibold shadow focus:border-orange-500 hover:border-orange-500 focus:text-orange-500 hover:text-orange-500" on:click={() => {
