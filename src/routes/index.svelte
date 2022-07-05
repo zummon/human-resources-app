@@ -25,11 +25,11 @@
 			promise = gather({ date }) 
 		}} />
 	</label>
-	<div>
+	
 		<a class="inline-flex items-center px-3 rounded border-2 font-semibold shadow focus:border-orange-500 hover:border-orange-500 focus:text-orange-500 hover:text-orange-500" href="data-as-{date}">
 			api
 		</a>
-	</div>
+	
 </div>
 <div class="min-h-[32px]"></div>
 
