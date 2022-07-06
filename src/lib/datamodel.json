@@ -1,5 +1,7 @@
 {
 	"id": "",
+	"birthdate": "",
+	"email": "",
 	"personal": [
 		{
 			"applydate": "",
@@ -16,7 +18,9 @@
 			"position": "",
 			"group": "",
 			"place": "",
-			"type": ""
+			"type": "",
+			"payroll": "",
+			"note": ""
 		}
 	],
 	"knowledge": [
@@ -25,7 +29,25 @@
 			"level": "",
 			"name": "",
 			"major": "",
-			"provider": ""
+			"provider": "",
+			"report": "file"
+		}
+	],
+	"medal": [
+		{
+			"requestdate": "",
+			"approvaldate": "",
+			"rank": "",
+			"name": "",
+			"note": ""
+		}
+	],
+	"timestamps": [""],
+	"events": [
+		{
+			"date": "",
+			"name": "",
+			"note": ""
 		}
 	]
 }
